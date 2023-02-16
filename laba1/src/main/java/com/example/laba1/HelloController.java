@@ -50,6 +50,9 @@ public class HelloController {
 
     @FXML
     void initialize() {
+        setRasField.setMaxWidth(662);
+        setRasField.setWrapText(true);
+
         confirm.setOnAction(event -> {
             if(isWord.isSelected()) {
                 String s = getAlphaField.getText();
@@ -87,6 +90,9 @@ public class HelloController {
 
                     Integer res = Integer.parseInt(s2);
                     String result = numberToWord(alpha, res);
+
+                    setRasField.setText(getCalculations());
+                    setCalculations();
 
                     setResultWordField.setText(result);
 

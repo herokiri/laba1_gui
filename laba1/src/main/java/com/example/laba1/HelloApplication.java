@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class HelloApplication extends Application {
+
+    private static String calculations = "(";
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
@@ -55,6 +58,7 @@ public class HelloApplication extends Application {
     }
 
     public static String numberToWord(char[] alpha, int number){
+        String perv = "";
         ArrayList<Integer> koeffs = new ArrayList<Integer>();
 
         if(number <= alpha.length) {
@@ -65,7 +69,11 @@ public class HelloApplication extends Application {
         String result = "";
         int counter = 0;
         while(!(number <= alpha.length)) {
+            if(counter > 0) {
+                perv += " * "  + alpha.length + " + " + ost + ")";
+            }
             counter++;
+
             int tmp = number;
 
             //когда изначально остаток равен 0
@@ -75,7 +83,7 @@ public class HelloApplication extends Application {
                 ost = tmp - (number * alpha.length);
                 koeffs.add(ost);
 
-                System.out.println(number + " * " + alpha.length + " + " + ost + "=");
+                calculations += "(" + number + " * " + alpha.length + " + " + ost + ")" + perv + " = ";
                 continue;
             }
 
@@ -83,18 +91,27 @@ public class HelloApplication extends Application {
             number = number / alpha.length;
             ost = tmp - (number * alpha.length);
             koeffs.add(ost);
-            System.out.println(number + " * " + alpha.length + " + " + ost + "=");
+            calculations += "(" + number + " * " + alpha.length + " + " + ost + ")" + perv + " = ";
         }
         //number первый коэфф
         koeffs.add(number);
 
 
         for(int k = koeffs.size() - 1; k >= 0; k--) {
-
+            counter--;
+            if(k != 0) calculations += koeffs.get(k) + " * " + alpha.length + "^" + k + " + ";
             result += alpha[koeffs.get(k) - 1];
 
         }
+        calculations += koeffs.get(0);
         return result;
+    }
+
+    public static String getCalculations() {
+        return calculations;
+    }
+    public static void setCalculations() {
+        calculations = "";
     }
     public static int wordToNumber(char[] letters, String word) {
         int k = word.length();
