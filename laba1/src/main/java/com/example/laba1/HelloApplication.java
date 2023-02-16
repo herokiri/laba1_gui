@@ -125,6 +125,7 @@ public class HelloApplication extends Application {
                     l = (i+1);
                 }
             }
+            calculations += "(" + letters.length + "^" + k + ") * " + l + " + ";
             sum += Math.pow(letters.length, k) * l;
         }
 

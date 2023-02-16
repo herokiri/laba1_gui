@@ -68,6 +68,9 @@ public class HelloController {
 
                     int res = wordToNumber(alpha, s2);
 
+                    setRasField.setText(getCalculations());
+                    setCalculations();
+
                     setResultWordField.setText(Integer.toString(res));
                 }
                 else{
