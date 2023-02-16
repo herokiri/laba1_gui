@@ -27,7 +27,7 @@ public class HelloApplication extends Application {
         boolean isOnlyDigits = true;
         for(int i = 0; i < word.length() && isOnlyDigits; i++) {
             if(!Character.isDigit(word.charAt(i))) {
-                isOnlyDigits = false;
+               return false;
             }
         }
         return true; // => true
